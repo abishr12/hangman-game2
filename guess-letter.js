@@ -6,6 +6,15 @@ function GuessLetter(word) {
 
   var check = new CheckLetter(this.word);
   var self = this;
+  this.responseToLetter = function(letter) {
+    check.findLetter(letter);
+    check.show();
+    check.displayScore();
+    check.gameOver();
+    if (!check.finishGame) {
+      self.playGame();
+    }
+  };
 
   this.playGame = function() {
     inquirer
@@ -17,16 +26,17 @@ function GuessLetter(word) {
         }
       ])
       .then(function(answers) {
-        check.findLetter(answers.letterGuess);
-        check.show();
-        check.displayScore();
-
-        self.playGame();
+        // check.findLetter(answers.letterGuess);
+        // check.show();
+        // check.displayScore();
+        // if (check.totalChances > 0) {
+        //   self.playGame();
+        // }
+        self.responseToLetter(answers.letterGuess);
       });
   };
 }
 
-var test = new GuessLetter("hello");
+var test = new GuessLetter("hello there");
 //test.playGame();
 test.playGame();
-module.exports = GuessLetter;

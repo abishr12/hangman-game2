@@ -1,13 +1,33 @@
+var SplitWord = require("./split-word.js");
+
 function CheckLetter(word) {
   this.word = word;
+  self = this;
+  var splitting = new SplitWord(this.word);
+  this.wordSplit = function() {
+    splitting.makesplit();
+  };
+  this.finishGame = false;
   this.correctGuesses = [];
   this.wrongGuesses = [];
   this.masked = [];
   this.totalChances = 10;
-  //var gameWord = new SplitWord(this.word);
+  this.gameOver = function() {
+    self.wordSplit();
+    console.log(splitting.separate);
+    if (this.totalChances === 0) {
+      console.log("GAME OVER!");
+      this.finishGame = true;
+    }
+    if (splitting.separate.toString() === this.masked.toString()) {
+      console.log("You Win!!!");
+      this.finishGame = true;
+    }
+  };
+
   this.findLetter = function(letter) {
     for (var i = 0; i < word.length; i++) {
-      if (letter === word[i]) {
+      if (letter === word[i] && this.correctGuesses.indexOf(letter) === -1) {
         this.correctGuesses.push(letter);
         //console.log("letter found");
         //console.log(this.correctGuesses);
@@ -15,13 +35,14 @@ function CheckLetter(word) {
         break;
       } else if (i === word.length - 1) {
         this.wrongGuesses.push(letter);
+        this.totalChances--;
         console.log("Incorrect!!!");
       }
     }
-    //console.log(this.correctGuesses);
   };
 
   this.disguise = function() {
+    this.masked.splice(0, this.masked.length);
     if (this.correctGuesses.length === 0) {
       for (var i = 0; i < word.length; i++) {
         this.masked.push("_");
@@ -29,17 +50,16 @@ function CheckLetter(word) {
     } else {
       for (var i = 0; i < word.length; i++) {
         correctLetter = word[i];
-        for (var a = 0; a < this.correctGuesses.length; a++) {
-          if (correctLetter === this.correctGuesses[a]) {
-            this.masked.push(correctLetter);
-          } else if (a === this.correctGuesses.length - 1) {
-            this.masked.push("_");
-          }
+        if (this.correctGuesses.indexOf(correctLetter) !== -1) {
+          this.masked.push(correctLetter);
+        } else if (correctLetter === " ") {
+          this.masked.push(" ");
+        } else {
+          this.masked.push("_");
         }
       }
     }
-
-    //console.log(this.masked);
+    //console.log(" masked" + this.masked);
   };
   this.show = function() {
     this.disguise();
@@ -47,8 +67,8 @@ function CheckLetter(word) {
     console.log(this.masked2);
   };
   this.displayScore = function() {
-    this.totalChances = this.totalChances - this.wrongGuesses.length;
-    console.log("Chances Left ---->" + this.totalChances);
+    //this.totalChances = this.totalChances - this.wrongGuesses.length;
+    console.log("Chances Left ----> " + this.totalChances);
   };
 }
 
