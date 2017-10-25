@@ -8,9 +8,4 @@ function SplitWord(word) {
   };
 }
 
-// var adham = new SplitWord("hello");
-// adham.makesplit();
-//
-// console.log(adham.separate[3]);
-
 module.exports = SplitWord;

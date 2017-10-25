@@ -14,7 +14,7 @@ function CheckLetter(word) {
   this.totalChances = 10;
   this.gameOver = function() {
     self.wordSplit();
-    console.log(splitting.separate);
+    console.log("WRONG LETTERS USED: ", this.wrongGuesses);
     if (this.totalChances === 0) {
       console.log("GAME OVER!");
       this.finishGame = true;
@@ -29,9 +29,10 @@ function CheckLetter(word) {
     for (var i = 0; i < word.length; i++) {
       if (letter === word[i] && this.correctGuesses.indexOf(letter) === -1) {
         this.correctGuesses.push(letter);
-        //console.log("letter found");
-        //console.log(this.correctGuesses);
         console.log("CORRECT!!!!");
+        break;
+      } else if (this.correctGuesses.indexOf(letter) !== -1) {
+        console.log("CORRECT!!! BUT YOU ALREADY GUESSED IT");
         break;
       } else if (i === word.length - 1) {
         this.wrongGuesses.push(letter);

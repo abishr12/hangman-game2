@@ -26,17 +26,11 @@ function GuessLetter(word) {
         }
       ])
       .then(function(answers) {
-        // check.findLetter(answers.letterGuess);
-        // check.show();
-        // check.displayScore();
-        // if (check.totalChances > 0) {
-        //   self.playGame();
-        // }
         self.responseToLetter(answers.letterGuess);
       });
   };
 }
 
-var test = new GuessLetter("hello there");
+var test = new GuessLetter("would the real slim shady please stand?");
 //test.playGame();
 test.playGame();
