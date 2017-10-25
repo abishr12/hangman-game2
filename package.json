@@ -1,0 +1,27 @@
+{
+  "name": "hangman-game2",
+  "version": "1.0.0",
+  "description": "'playing hangman using node'",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abishr12/hangman-game2.git"
+  },
+  "keywords": [
+    "'hangman'",
+    "'having",
+    "fun'"
+  ],
+  "author": "adham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abishr12/hangman-game2/issues"
+  },
+  "homepage": "https://github.com/abishr12/hangman-game2#readme",
+  "dependencies": {
+    "inquirer": "^3.3.0"
+  }
+}
